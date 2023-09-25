@@ -1,0 +1,86 @@
+html {
+  font-size: 10px !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+span,
+strong,
+time,
+address,
+i,
+a,
+b,
+label,
+li,
+td {
+  text-rendering: optimizeLegibility !important;
+  margin-bottom: 0;
+}
+
+[class*="-bold"] {
+  font-weight: 700;
+}
+
+[class*="-semibold"] {
+  font-weight: 600;
+}
+
+[class*="-medium"] {
+  font-weight: 500;
+}
+
+[class*="-regular"] {
+  font-weight: 400;
+}
+
+[class*="-light"] {
+  font-weight: 300;
+}
+
+[class*="font-32"] {
+  font-size: 3.2rem;
+}
+
+[class*="font-24"] {
+  font-size: 2.4rem;
+}
+
+[class*="font-20"] {
+  font-size: 2rem;
+}
+
+[class*="font-18"] {
+  font-size: 1.8rem;
+}
+
+[class*="font-16"] {
+  font-size: 1.6rem;
+}
+
+[class*="font-14"] {
+  font-size: 1.4rem;
+}
+
+[class*="font-12"] {
+  font-size: 1.2rem;
+}
+
+
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 9px !important;
+  }
+
+  [class*="font-14"] {
+    font-size: 1.6rem;
+  }
+  
+  [class*="font-12"] {
+    font-size: 1.3rem;
+  }
+}
