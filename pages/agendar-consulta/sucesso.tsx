@@ -1,9 +1,12 @@
 import { useRouter } from "next/router";
 
-import { formatTimeWithPrefix } from "src/utils";
-import { Layout } from "src/presentation/layout";
-import { Container, PageResume } from "@/presentation";
-import { ResultScheduleAppointment } from "src/presentation/pages/schedule-appointment";
+import {
+  Layout,
+  Container,
+  PageResume,
+  formatTimeWithPrefix,
+  ResultScheduleAppointment,
+} from "@/presentation";
 
 export default function ScheduleAppointmentSucessPage() {
   const { query } = useRouter();

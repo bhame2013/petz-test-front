@@ -1,10 +1,7 @@
 import { useRouter } from "next/router";
 
-import { Layout } from "src/presentation/layout";
-import { CreateAppointment } from "src/domain/usecases";
-import { Container, PageResume } from "@/presentation";
-import { useCreateAppointment } from "src/presentation/hooks/schedule-appointment";
-import { FormScheduleAppointment } from "src/presentation/pages/schedule-appointment";
+import { CreateAppointment } from "@/domain";
+import { Layout, Container, PageResume, useCreateAppointment, FormScheduleAppointment } from "@/presentation";
 
 export default function ScheduleAppointmentPage() {
   const { create } = useCreateAppointment()

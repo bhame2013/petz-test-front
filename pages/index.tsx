@@ -1,5 +1,4 @@
-import { Layout } from "src/presentation/layout";
-import { Banner } from "src/presentation/pages/home";
+import { Layout, Banner } from "@/presentation";
 
 export default function HomePage() {
   return <Layout>

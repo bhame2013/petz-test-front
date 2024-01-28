@@ -1,9 +1,10 @@
 import "reflect-metadata";
 
+import dynamic from "next/dynamic";
 import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
 
-import dynamic from "next/dynamic";
+import { QueryClient } from "@tanstack/react-query";
 
 const QueryClientProvider = dynamic(
   () => import("@tanstack/react-query").then((e) => e.QueryClientProvider),
@@ -12,9 +13,8 @@ const QueryClientProvider = dynamic(
   }
 );
 
-import { QueryClient } from "@tanstack/react-query";
 
-import { ThemeProvider } from "@/presentation/contexts";
+import { ThemeProvider } from "@/presentation";
 
 import "styles/reset.css";
 import "styles/globals.css";

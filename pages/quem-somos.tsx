@@ -1,7 +1,4 @@
-import { PageResume } from "@/presentation";
-
-import { Layout } from "src/presentation/layout";
-import { AboutUs } from "src/presentation/pages/about-us";
+import { PageResume, Layout, AboutUs } from "@/presentation";
 
 export default function AboutPage() {
   return (
