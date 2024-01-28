@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { NextImage } from "src/presentation/components";
+import { NextImage } from "@/presentation";
 
 import * as S from "./styles";
 

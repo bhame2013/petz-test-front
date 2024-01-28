@@ -1,4 +1,4 @@
-import { Container } from "src/presentation/components";
+import { Container } from "@/presentation";
 
 import * as S from "./styles";
 

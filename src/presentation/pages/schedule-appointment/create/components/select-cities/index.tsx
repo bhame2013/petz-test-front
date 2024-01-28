@@ -1,5 +1,5 @@
-import Select from "src/presentation/components/form/select";
-import { useLoadCities } from "src/presentation/hooks/schedule-appointment";
+import { useLoadCities } from "@/presentation";
+import Select from "@/presentation/components/form/select";
 
 export function SelectCities() {
   const { data, isFetching } = useLoadCities();

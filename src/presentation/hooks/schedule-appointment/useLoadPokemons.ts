@@ -1,11 +1,14 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useCasesStore } from "src/presentation/stores/schedule-appointment";
+
+import { LoadPokemonsList } from "@/domain";
+import { container, pokeApiTypes } from "@/container";
 
 export function useLoadPokemons() {
-  const loadPokemonsList = useCasesStore((state) => state.loadPokemonsList);
 
   async function getPokemonsList(pageParam: number) {
-    return await loadPokemonsList.loadAll(pageParam * 20);
+    const response = await container.get<LoadPokemonsList>(pokeApiTypes.RemoteLoadPokemonsList).loadAll(pageParam * 20);
+
+    return response
   }
 
   return useInfiniteQuery(

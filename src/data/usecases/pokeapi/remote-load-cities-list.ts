@@ -1,21 +1,24 @@
-import { LoadCitiesList } from "src/domain/usecases";
-import { NoContentError, NotFoundError, UnexpectedError } from "src/domain/errors";
-import { HttpClient, HttpStatusCode } from "src/data/protocols/http";
+import { inject, injectable } from "inversify";
 
+import * as data from "@/data";
+import { InfraTypes, makePokeApiURL } from "@/container";
+import { NoContentError, NotFoundError, UnexpectedError,LoadCitiesList } from "@/domain";
+
+@injectable()
 export class RemoteLoadCitiesList implements LoadCitiesList {
   constructor(
-    private readonly baseUrl: string,
-    private readonly httpClient: HttpClient<LoadCitiesList.Model>
+  @inject(InfraTypes.makePokeApiURL) private readonly makePokeApiURL: makePokeApiURL,
+   @inject(InfraTypes.http) private readonly httpClient: data.HttpClient<LoadCitiesList.Model>
   ) {}
 
   async loadAll(url: string) {
     const httpResponse = await this.httpClient.request({
-      url: this.baseUrl + url,
+      url: this.makePokeApiURL.make(`/region/${url}`),
       method: "get",
     });
 
     switch (httpResponse.statusCode) {
-      case HttpStatusCode.ok: 
+      case data.HttpStatusCode.ok: 
       
       if(httpResponse.body?.locations.length === 0) {
         throw new NoContentError("Não estamos atendendo nesta região no momento.");
@@ -23,7 +26,7 @@ export class RemoteLoadCitiesList implements LoadCitiesList {
 
       return httpResponse.body;
 
-      case HttpStatusCode.notFound: throw new NotFoundError();
+      case data.HttpStatusCode.notFound: throw new NotFoundError();
       
       default: throw new UnexpectedError();
     }

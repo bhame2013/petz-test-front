@@ -1,7 +1,7 @@
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { CreateAppointment } from "src/domain/usecases";
+import { CreateAppointment } from "@/domain";
 
 const appointmentSchema: ZodType<CreateAppointment.Params> = z.object({
   date: z.string().min(1, { message: "Preencha a data." }),

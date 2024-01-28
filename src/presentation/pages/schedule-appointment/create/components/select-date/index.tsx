@@ -1,5 +1,5 @@
-import Select from "src/presentation/components/form/select";
-import { useLoadDate } from "src/presentation/hooks/schedule-appointment";
+import { useLoadDate } from "@/presentation";
+import Select from "@/presentation/components/form/select";
 
 export function SelectDate() {
 

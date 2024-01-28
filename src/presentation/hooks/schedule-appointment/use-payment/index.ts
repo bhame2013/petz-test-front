@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useFormContext } from "react-hook-form";
 
-import { CreateAppointment } from "src/domain/usecases";
-import { useCasesStore } from "src/presentation/stores/schedule-appointment";
+import { CreateAppointment } from "@domain";
 
 export function usePayment() {
   const loadPayment = useCasesStore(state => state.loadPayment)

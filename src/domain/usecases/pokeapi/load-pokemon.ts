@@ -1,4 +1,4 @@
-import { PokemonDetailModel } from "src/domain/models/pokeapi";
+import { PokemonDetailModel } from "@/domain"
 
 export interface LoadPokemon {
   load: (url: string) => Promise<LoadPokemon.Model | undefined>;

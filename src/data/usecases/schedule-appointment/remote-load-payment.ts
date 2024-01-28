@@ -1,29 +1,32 @@
-import { LoadPayment } from "src/domain/usecases";
-import { NotFoundError, UnexpectedError } from "src/domain/errors";
-import { HttpClient, HttpStatusCode } from "src/data/protocols/http";
+import { inject, injectable } from "inversify";
 
+import * as data from "@/data";
+import { InfraTypes, makeApiURL } from "@/container";
+import { NotFoundError, UnexpectedError, LoadPayment } from "@/domain";
+
+@injectable()
 export class RemoteLoadPayment implements LoadPayment {
   constructor(
-    private readonly url: string,
-    private readonly httpClient: HttpClient<LoadPayment.Model>
+   @inject(InfraTypes.makeApiURL) private readonly makeApiURL: makeApiURL,
+   @inject(InfraTypes.http) private readonly httpClient: data.HttpClient<LoadPayment.Model>
   ) {}
 
   async load(body: LoadPayment.Params) {
     const httpResponse = await this.httpClient.request({
-      url: this.url,
+      url: this.makeApiURL.make("scheduling/payment"),
       method: "post",
       body,
     });
 
     switch (httpResponse.statusCode) {
-      case HttpStatusCode.ok:
+      case data.HttpStatusCode.ok:
         if (!httpResponse.body) {
           throw new UnexpectedError();
         }
 
         return httpResponse.body;
 
-      case HttpStatusCode.notFound:
+      case data.HttpStatusCode.notFound:
         throw new NotFoundError();
 
       default:

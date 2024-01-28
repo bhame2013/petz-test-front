@@ -1,7 +1,8 @@
+import { injectable } from "inversify";
 import axios, { AxiosResponse } from "axios";
+import { HttpRequest, HttpResponse, HttpClient } from "@/data";
 
-import { HttpRequest, HttpResponse, HttpClient } from "src/data/protocols/http";
-
+@injectable()
 export class AxiosHttpClient implements HttpClient {
   async request(data: HttpRequest): Promise<HttpResponse> {
     try {

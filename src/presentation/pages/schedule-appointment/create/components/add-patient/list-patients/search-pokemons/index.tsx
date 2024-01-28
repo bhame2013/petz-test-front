@@ -4,9 +4,7 @@ import { useFormContext } from "react-hook-form";
 
 import { Overlay } from "./overlay";
 import { CallbackList } from "./callback-list";
-import { NextImage } from "src/presentation/components";
-import { InputControl } from "src/presentation/components/form";
-import { makeRegisterName } from "src/presentation/components/form/helpers/make-register-name";
+import { NextImage, InputControl, makeRegisterName } from "@/presentation";
 
 import { filterList, mergeFilteredOptions } from "./helpers";
 import { IFilteredOption, ISearchPokemonsSelectProps } from "./interfaces";

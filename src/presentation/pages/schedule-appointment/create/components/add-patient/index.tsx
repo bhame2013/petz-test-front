@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { Error } from "src/presentation/components";
+import { Error } from "@/presentation";
 
 import { ListPatients } from "./list-patients";
 

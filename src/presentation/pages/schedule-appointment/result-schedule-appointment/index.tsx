@@ -1,4 +1,4 @@
-import { Button } from "src/presentation/components";
+import { Button } from "@/presentation";
 
 import { icons } from "./icons-status";
 

@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from "react-hook-form";
 
-import { CreateAppointment } from "src/domain/usecases";
-import { Input } from "src/presentation/components/form";
+import { Input } from "@/presentation";
+import { CreateAppointment } from "@/domain";
 
 import {
   Total,

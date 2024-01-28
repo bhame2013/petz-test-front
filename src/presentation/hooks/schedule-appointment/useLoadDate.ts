@@ -1,10 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { useCasesStore } from "src/presentation/stores/schedule-appointment";
+
+import { RemoteLoadDateList } from "@/data";
+import { container, scheduleAppointmentTypes } from "@/container";
 
 export function useLoadDate() {
-  const loadDateList = useCasesStore(state => state.loadDateList)
-  
-  const fetcher = () => loadDateList.loadAll();
+  const fetcher = async () => {
+    const response = await container
+      .get<RemoteLoadDateList>(scheduleAppointmentTypes.RemoteLoadDateList)
+      .loadAll();
+
+    return response;
+  };
 
   return useQuery(["date"], fetcher, {
     retry: 0,

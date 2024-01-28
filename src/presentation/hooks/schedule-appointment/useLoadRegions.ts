@@ -1,10 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { useCasesStore } from "src/presentation/stores/schedule-appointment";
+
+import { LoadRegionsList } from "@/domain";
+import { container, pokeApiTypes } from "@/container";
 
 export function useLoadRegions() {
-  const loadRegionsList = useCasesStore(state => state.loadRegionsList);
+  
+  async function fetcher() {
+    const response = await container
+      .get<LoadRegionsList>(pokeApiTypes.RemoteLoadRegionsList)
+      .loadAll();
 
-  const fetcher = () => loadRegionsList.loadAll();
+    return response;
+  }
 
   return useQuery(["regions"], fetcher, {
     retry: 0,

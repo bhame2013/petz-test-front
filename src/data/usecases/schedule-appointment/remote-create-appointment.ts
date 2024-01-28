@@ -1,34 +1,34 @@
-import { CreateAppointment } from "src/domain/usecases";
-import {
-  NotFoundError,
-  UnexpectedError,
-} from "src/domain/errors";
-import { HttpClient, HttpStatusCode } from "src/data/protocols/http";
+import { inject, injectable } from "inversify";
 
+import * as data from "@/data";
+import { InfraTypes, makeApiURL } from "@/container";
+import { CreateAppointment, NotFoundError, UnexpectedError } from "@/domain";
+
+@injectable()
 export class RemoteCreateAppointment implements CreateAppointment {
   constructor(
-    private readonly url: string,
-    private readonly httpClient: HttpClient<CreateAppointment.Model>
+    @inject(InfraTypes.makeApiURL) private readonly makeApiURL: makeApiURL,
+    @inject(InfraTypes.http) private readonly httpClient: data.HttpClient<CreateAppointment.Model>
   ) {}
 
   async create(body: CreateAppointment.Params) {
     const httpResponse = await this.httpClient.request({
-      url: this.url,
+      url: this.makeApiURL.make("scheduling/create"),
       method: "post",
       body,
     });
 
     switch (httpResponse.statusCode) {
-      case HttpStatusCode.ok:
-        if(!httpResponse.body) {
+      case data.HttpStatusCode.ok:
+        if (!httpResponse.body) {
           throw new UnexpectedError();
         }
 
         return httpResponse.body;
 
-      case HttpStatusCode.notFound:
+      case data.HttpStatusCode.notFound:
         throw new NotFoundError();
-        
+
       default:
         throw new UnexpectedError();
     }

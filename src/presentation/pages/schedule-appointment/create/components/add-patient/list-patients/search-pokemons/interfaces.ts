@@ -1,4 +1,4 @@
-import { IOptionSelect, ISelectProps } from "src/presentation/components/form/interfaces";
+import { IOptionSelect, ISelectProps } from "@/presentation";
 
 export interface ISearchPokemonsSelectProps extends ISelectProps {
   callback(): void;

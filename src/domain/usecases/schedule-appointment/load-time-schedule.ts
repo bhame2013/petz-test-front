@@ -1,4 +1,4 @@
-import { TimeResultModel } from "src/domain/models/schedule-appointment";
+import { TimeResultModel } from "@/domain";
 
 export interface LoadTimeSchedule {
   loadAll: (params: LoadTimeSchedule.Params) => Promise<LoadTimeSchedule.Model>;

@@ -1,13 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useFormContext } from "react-hook-form";
 
-import { NoContentError } from "src/domain/errors";
-import { CreateAppointment } from "src/domain/usecases";
-import { useCasesStore } from "src/presentation/stores/schedule-appointment";
+import { container, pokeApiTypes } from "@/container";
+import { CreateAppointment, NoContentError, LoadCitiesList } from "@/domain";
 
 export function useLoadCities() {
-  const loadCitiesList = useCasesStore(state => state.loadCitiesList)
-
   const { setValue, setError, clearErrors, watch } = useFormContext<CreateAppointment.Params>();
 
   const region = watch("region");
@@ -17,7 +14,9 @@ export function useLoadCities() {
       clearErrors("region");
       setValue("city", "");
 
-      return await loadCitiesList.loadAll(region);
+      const response = await container.get<LoadCitiesList>(pokeApiTypes.RemoteLoadCitiesList).loadAll(region)
+
+      return response
     } catch (err) {
       if (err instanceof NoContentError) {
         setError("region", {

@@ -1,7 +1,5 @@
-import { formatTime } from "src/utils";
-
-import Select from "src/presentation/components/form/select";
-import { useLoadTime } from "src/presentation/hooks/schedule-appointment";
+import { useLoadTime, formatTime } from "@/presentation"
+import Select from "@/presentation/components/form/select";
 
 export function SelectTime() {
   const { data, isFetching } = useLoadTime();

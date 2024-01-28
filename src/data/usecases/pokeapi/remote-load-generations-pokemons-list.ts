@@ -1,7 +1,8 @@
-import { Generations } from "src/domain/models";
+import { pokeApiTypes } from "@/container/pokeapi";
+import { Generations, LoadSpecie, LoadPokemon, LoadGenerationsPokemonsList } from "@/domain";
+import { inject, injectable } from "inversify";
 
-import { LoadSpecie, LoadPokemon, LoadGenerationsPokemonsList } from "src/domain/usecases";
-
+@injectable()
 export class RemoteLoadGenerationsPokemonsList implements LoadGenerationsPokemonsList {
   constructor(
     private readonly loadSpecie: RemoteLoadGenerationsPokemonsList.Params['loadSpecie'],

@@ -1,7 +1,7 @@
-import { AppointmentModel } from "src/domain/models/schedule-appointment";
-
 export interface CreateAppointment {
-  create: (params: CreateAppointment.Params) => Promise<CreateAppointment.Model>;
+  create: (
+    params: CreateAppointment.Params
+  ) => Promise<CreateAppointment.Model>;
 }
 
 export namespace CreateAppointment {
@@ -15,5 +15,9 @@ export namespace CreateAppointment {
     patients: string[];
   };
 
-  export type Model = AppointmentModel;
+  export type Model = {
+    date: string;
+    hour: string;
+    numberPatients: number;
+  };
 }

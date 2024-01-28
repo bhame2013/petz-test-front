@@ -1,11 +1,8 @@
-import { IOptionSelect } from "src/presentation/components/form/interfaces";
+import { IOptionSelect } from "@/presentation";
 
 import { IFilteredOption } from "./interfaces";
 
-export function mergeFilteredOptions(
-  optionsSelect: IOptionSelect[] | undefined,
-  filteredList: IFilteredOption[]
-): IFilteredOption[] {
+export function mergeFilteredOptions(optionsSelect: IOptionSelect[] | undefined, filteredList: IFilteredOption[]): IFilteredOption[] {
   if (!optionsSelect) {
     return [];
   }

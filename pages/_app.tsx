@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
 
@@ -12,7 +14,7 @@ const QueryClientProvider = dynamic(
 
 import { QueryClient } from "@tanstack/react-query";
 
-import { ThemeProvider } from "src/presentation/contexts";
+import { ThemeProvider } from "@/presentation/contexts";
 
 import "styles/reset.css";
 import "styles/globals.css";

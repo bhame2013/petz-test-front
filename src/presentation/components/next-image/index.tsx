@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Error } from "src/presentation/components";
+import { Error } from "@/presentation";
 
 import { INextImageProps } from "./interfaces";
 

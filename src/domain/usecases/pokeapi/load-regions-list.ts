@@ -1,4 +1,4 @@
-import { RegionResultModel } from "src/domain/models/pokeapi";
+import { RegionResultModel } from "@/domain"
 
 export interface LoadRegionsList {
   loadAll: () => Promise<LoadRegionsList.Model | undefined>;

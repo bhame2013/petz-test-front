@@ -1,4 +1,4 @@
-import { PageResume } from "src/presentation/components";
+import { PageResume } from "@/presentation";
 
 import { Layout } from "src/presentation/layout";
 import { AboutUs } from "src/presentation/pages/about-us";

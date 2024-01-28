@@ -1,4 +1,4 @@
-import { Error } from "src/presentation/components";
+import { Error } from "@/presentation";
 
 import { Label } from "./label";
 import { ErrorMessage } from "./error";

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 
 import { Layout } from "src/presentation/layout";
-import { Container, PageResume } from "src/presentation/components";
+import { Container, PageResume } from "@/presentation";
 import { ResultScheduleAppointment } from "src/presentation/pages/schedule-appointment";
 
 export default function ScheduleAppointmentErrorPage() {

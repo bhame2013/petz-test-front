@@ -1,5 +1,4 @@
-import { usePayment } from "src/presentation/hooks/schedule-appointment";
-import { Button, Error, LoaderCircle } from "src/presentation/components";
+import { Button, Error, LoaderCircle, usePayment } from "@/presentation";
 
 import * as S from "./styles";
 

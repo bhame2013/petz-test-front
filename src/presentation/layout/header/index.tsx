@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Button, Container } from "src/presentation/components";
+import { Button, Container } from "@/presentation";
 
 import { Logo } from "./logo";
 

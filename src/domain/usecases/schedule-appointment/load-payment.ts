@@ -1,5 +1,4 @@
-import { LoadGenerationsPokemonsList } from "../pokeapi";
-import { PaymentResultModel } from "src/domain/models/schedule-appointment";
+import { LoadGenerationsPokemonsList } from "@/domain";
 
 export interface LoadPayment {
   load: (params: LoadPayment.Params) => Promise<LoadPayment.Model>;
@@ -11,5 +10,14 @@ export namespace LoadPayment {
     generations: LoadGenerationsPokemonsList.Model;
   };
 
-  export type Model = PaymentResultModel;
+  export type Model = {
+    tax: string;
+    total: string;
+    subtotal: string;
+    taxValue: string;
+    taxLimit: string;
+    taxTotal: string;
+    unitaryPrice: string;
+    numberPatients: number;
+  };
 }

@@ -1,4 +1,4 @@
-import { Breadcrumb, Container } from "src/presentation/components";
+import { Breadcrumb, Container } from "@/presentation";
 
 import { IPageResume } from "./interfaces";
 

@@ -1,4 +1,4 @@
-import { LoaderCircle } from "src/presentation/components";
+import { LoaderCircle } from "@/presentation";
 
 import { ICallbacklistProps } from "./interface";
 

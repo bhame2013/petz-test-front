@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { formatTimeWithPrefix } from "src/utils";
 import { Layout } from "src/presentation/layout";
-import { Container, PageResume } from "src/presentation/components";
+import { Container, PageResume } from "@/presentation";
 import { ResultScheduleAppointment } from "src/presentation/pages/schedule-appointment";
 
 export default function ScheduleAppointmentSucessPage() {

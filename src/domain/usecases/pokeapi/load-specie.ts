@@ -1,4 +1,4 @@
-import { SpecieDetailModel } from "src/domain/models/pokeapi";
+import { SpecieDetailModel } from "@/domain"
 
 export interface LoadSpecie {
   load: (url: string) => Promise<LoadSpecie.Model | undefined>;

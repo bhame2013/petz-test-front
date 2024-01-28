@@ -1,4 +1,4 @@
-import { CitiesResultModel } from "src/domain/models/pokeapi";
+import { CitiesResultModel } from "@/domain";
 
 export interface LoadCitiesList {
   loadAll: (url: string) => Promise<LoadCitiesList.Model | undefined>;

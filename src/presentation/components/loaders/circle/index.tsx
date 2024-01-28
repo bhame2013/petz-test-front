@@ -1,4 +1,4 @@
-import { Error } from "src/presentation/components";
+import { Error } from "@/presentation";
 
 import { ILoaderCircleProps } from "./interfaces";
 

@@ -1,5 +1,5 @@
+import { useLoadPokemons } from "@/presentation";
 import { SearchPokemons } from "./search-pokemons";
-import { useLoadPokemons } from "src/presentation/hooks/schedule-appointment";
 
 export function ListPatients({ patients, handleDeletePatient }: { patients: string[],  handleDeletePatient(uid: string): void }) {
   const { data, fetchNextPage, isFetching } = useLoadPokemons();
