@@ -1,3 +1,5 @@
+import debounce from "lodash/debounce";
+
 import { LoaderCircle } from "@/presentation";
 
 import { ICallbacklistProps } from "./interface";
@@ -11,17 +13,20 @@ export function CallbackList({
   setOverlay,
   handleChange,
 }: ICallbacklistProps) {
-  
-  function handleScroll(ev: any) {
+
+  async function handleScroll(ev: any) {
     const target = ev.target;
-
-    const isEndList = target.offsetHeight + target.scrollTop >= target.scrollHeight - 20;
-
+  
+    const isEndList =
+      target.offsetHeight + target.scrollTop >= target.scrollHeight - 20;
+  
     if (isEndList) {
-      callback();
+      await callback();
     }
   }
 
+  const debouncedHandleScroll = debounce(handleScroll, 200);
+  
   const optionsFilter = options.filter((option) => option.filter);
 
   const normalOptions = options.filter((option) => !option.filter);
@@ -47,7 +52,7 @@ export function CallbackList({
       )}
 
       {normalOptions?.length > 0 && (
-        <ul onScroll={handleScroll}>
+        <ul onScroll={debouncedHandleScroll}>
           {normalOptions.map((option) => (
             <li
               key={option.value}
@@ -57,7 +62,11 @@ export function CallbackList({
             </li>
           ))}
 
-          {loading && <li className="loading"><LoaderCircle size={20}/></li>}
+          {loading && (
+            <li className="loading">
+              <LoaderCircle size={20} />
+            </li>
+          )}
         </ul>
       )}
     </S.CallbackList>

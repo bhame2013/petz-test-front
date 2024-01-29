@@ -1,14 +1,18 @@
 import { inject, injectable } from "inversify";
 
-import * as data from "@/data";
-import { InfraTypes, makePokeApiURL } from "@/container";
+import { HttpStatusCode, type HttpClient } from "@/data";
 import { LoadSpecie, NotFoundError, UnexpectedError } from "@/domain";
+
+import { InfraTypes } from "@/container/infra/types";
+import { makePokeApiURL } from "@/container/infra/make-poke-api-url";
 
 @injectable()
 export class RemoteLoadSpecie implements LoadSpecie {
   constructor(
-    @inject(InfraTypes.makePokeApiURL) private readonly makePokeApiURL: makePokeApiURL,
-   @inject(InfraTypes.http) private readonly httpClient: data.HttpClient<LoadSpecie.Model>
+    @inject(InfraTypes.makePokeApiURL)
+    private readonly makePokeApiURL: makePokeApiURL,
+    @inject(InfraTypes.http)
+    private readonly httpClient: HttpClient<LoadSpecie.Model>
   ) {}
 
   async load(url: string) {
@@ -18,9 +22,12 @@ export class RemoteLoadSpecie implements LoadSpecie {
     });
 
     switch (httpResponse.statusCode) {
-      case data.HttpStatusCode.ok: return httpResponse.body;
-      case data.HttpStatusCode.notFound: throw new NotFoundError();
-      default: throw new UnexpectedError();
+      case HttpStatusCode.ok:
+        return httpResponse.body;
+      case HttpStatusCode.notFound:
+        throw new NotFoundError();
+      default:
+        throw new UnexpectedError();
     }
   }
 }

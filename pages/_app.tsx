@@ -13,12 +13,11 @@ const QueryClientProvider = dynamic(
   }
 );
 
-
 import { ThemeProvider } from "@/presentation";
 
-import "styles/reset.css";
-import "styles/globals.css";
-import "styles/fonts.css";
+import "../styles/reset.css";
+import "../styles/globals.css";
+import "../styles/fonts.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

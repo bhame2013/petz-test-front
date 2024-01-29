@@ -1,12 +1,13 @@
+import { inject, injectable } from "inversify";
+
 import { pokeApiTypes } from "@/container/pokeapi";
 import { Generations, LoadSpecie, LoadPokemon, LoadGenerationsPokemonsList } from "@/domain";
-import { inject, injectable } from "inversify";
 
 @injectable()
 export class RemoteLoadGenerationsPokemonsList implements LoadGenerationsPokemonsList {
   constructor(
-    private readonly loadSpecie: RemoteLoadGenerationsPokemonsList.Params['loadSpecie'],
-    private readonly loadPokemon: RemoteLoadGenerationsPokemonsList.Params['loadPokemon'],
+  @inject(pokeApiTypes.RemoteLoadSpecie) private readonly loadSpecie: RemoteLoadGenerationsPokemonsList.Params['loadSpecie'],
+  @inject(pokeApiTypes.RemoteLoadPokemon) private readonly loadPokemon: RemoteLoadGenerationsPokemonsList.Params['loadPokemon'],
   ) {}
 
   async loadSpeciesUrls(patients: string[]) {
@@ -18,9 +19,7 @@ export class RemoteLoadGenerationsPokemonsList implements LoadGenerationsPokemon
   }
 
   async loadSpecies(speciesUrls: string[]) {
-    const loadSpeciesPromises  = speciesUrls.map((url) =>
-      this.loadSpecie.load(url)
-    );
+    const loadSpeciesPromises  = speciesUrls.map((url) => this.loadSpecie.load(url));
 
     return Promise.all(loadSpeciesPromises);
   }

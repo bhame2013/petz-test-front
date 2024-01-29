@@ -1,14 +1,16 @@
 import { inject, injectable } from "inversify";
 
-import * as data from "@/data";
-import { InfraTypes, makeApiURL } from "@/container";
+import { HttpStatusCode, type HttpClient } from "@/data";
 import { NotFoundError, UnexpectedError, LoadPayment } from "@/domain";
+
+import { InfraTypes } from "@/container/infra/types";
+import { makeApiURL } from "@/container/infra/make-api-url";
 
 @injectable()
 export class RemoteLoadPayment implements LoadPayment {
   constructor(
    @inject(InfraTypes.makeApiURL) private readonly makeApiURL: makeApiURL,
-   @inject(InfraTypes.http) private readonly httpClient: data.HttpClient<LoadPayment.Model>
+   @inject(InfraTypes.http) private readonly httpClient: HttpClient<LoadPayment.Model>
   ) {}
 
   async load(body: LoadPayment.Params) {
@@ -19,14 +21,14 @@ export class RemoteLoadPayment implements LoadPayment {
     });
 
     switch (httpResponse.statusCode) {
-      case data.HttpStatusCode.ok:
+      case HttpStatusCode.ok:
         if (!httpResponse.body) {
           throw new UnexpectedError();
         }
 
         return httpResponse.body;
 
-      case data.HttpStatusCode.notFound:
+      case HttpStatusCode.notFound:
         throw new NotFoundError();
 
       default:

@@ -1,14 +1,17 @@
 import { inject, injectable } from "inversify";
 
-import * as data from "@/data";
-import { InfraTypes, makeApiURL } from "@/container";
+import { HttpStatusCode, type HttpClient } from "@/data";
 import { LoadTimeSchedule, NotFoundError, UnexpectedError } from "@/domain";
+
+import { InfraTypes } from "@/container/infra/types";
+import { makeApiURL } from "@/container/infra/make-api-url";
 
 @injectable()
 export class RemoteLoadTimeList implements LoadTimeSchedule {
   constructor(
-   @inject(InfraTypes.makeApiURL) private readonly makeApiURL: makeApiURL,
-   @inject(InfraTypes.http) private readonly httpClient: data.HttpClient<LoadTimeSchedule.Model>
+    @inject(InfraTypes.makeApiURL) private readonly makeApiURL: makeApiURL,
+    @inject(InfraTypes.http)
+    private readonly httpClient: HttpClient<LoadTimeSchedule.Model>
   ) {}
 
   async loadAll(body: LoadTimeSchedule.Params) {
@@ -19,14 +22,14 @@ export class RemoteLoadTimeList implements LoadTimeSchedule {
     });
 
     switch (httpResponse.statusCode) {
-      case data.HttpStatusCode.ok:
+      case HttpStatusCode.ok:
         if (!httpResponse.body) {
           throw new UnexpectedError();
         }
 
         return httpResponse.body;
 
-      case data.HttpStatusCode.notFound:
+      case HttpStatusCode.notFound:
         throw new NotFoundError();
 
       default:

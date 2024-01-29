@@ -1,5 +1,3 @@
-import { TimeResultModel } from "@/domain";
-
 export interface LoadTimeSchedule {
   loadAll: (params: LoadTimeSchedule.Params) => Promise<LoadTimeSchedule.Model>;
 }
@@ -8,5 +6,5 @@ export namespace LoadTimeSchedule {
     date: string;
   };
 
-  export type Model = TimeResultModel;
+  export type Model = string[];
 }

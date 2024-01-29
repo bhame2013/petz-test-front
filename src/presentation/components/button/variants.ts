@@ -1,4 +1,4 @@
-import { ITheme } from "src/presentation/contexts/theme/interfaces";
+import { ITheme } from "@/presentation";
 
 interface IVariantSchema {
   color: string;

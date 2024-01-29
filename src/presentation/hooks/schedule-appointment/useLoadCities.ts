@@ -5,7 +5,8 @@ import { container, pokeApiTypes } from "@/container";
 import { CreateAppointment, NoContentError, LoadCitiesList } from "@/domain";
 
 export function useLoadCities() {
-  const { setValue, setError, clearErrors, watch } = useFormContext<CreateAppointment.Params>();
+  const { setValue, setError, clearErrors, watch } =
+    useFormContext<CreateAppointment.Params>();
 
   const region = watch("region");
 
@@ -14,9 +15,11 @@ export function useLoadCities() {
       clearErrors("region");
       setValue("city", "");
 
-      const response = await container.get<LoadCitiesList>(pokeApiTypes.RemoteLoadCitiesList).loadAll(region)
+      const response = await container
+        .get<LoadCitiesList>(pokeApiTypes.RemoteLoadCitiesList)
+        .loadAll(region);
 
-      return response
+      return response;
     } catch (err) {
       if (err instanceof NoContentError) {
         setError("region", {
@@ -28,7 +31,9 @@ export function useLoadCities() {
     }
   }
 
-  return useQuery(["city", region], fetcher, {
+  return useQuery({
+    queryKey: ["city", region],
+    queryFn: fetcher,
     staleTime: 0,
     refetchInterval: 0,
     refetchOnWindowFocus: false,

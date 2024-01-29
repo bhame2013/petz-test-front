@@ -4,7 +4,6 @@ import { LoadRegionsList } from "@/domain";
 import { container, pokeApiTypes } from "@/container";
 
 export function useLoadRegions() {
-  
   async function fetcher() {
     const response = await container
       .get<LoadRegionsList>(pokeApiTypes.RemoteLoadRegionsList)
@@ -13,7 +12,9 @@ export function useLoadRegions() {
     return response;
   }
 
-  return useQuery(["regions"], fetcher, {
+  return useQuery({
+    queryKey: ["regions"],
+    queryFn: fetcher,
     retry: 0,
     staleTime: 0,
     refetchInterval: 0,

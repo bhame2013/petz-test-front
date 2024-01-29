@@ -12,7 +12,9 @@ export function useLoadDate() {
     return response;
   };
 
-  return useQuery(["date"], fetcher, {
+  return useQuery({
+    queryKey: ["date"],
+    queryFn: fetcher,
     retry: 0,
     staleTime: 0,
     refetchInterval: 0,

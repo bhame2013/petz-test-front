@@ -1,31 +1,48 @@
 import { useQuery } from "@tanstack/react-query";
 import { useFormContext } from "react-hook-form";
 
-import { CreateAppointment } from "@domain";
+import {
+  LoadPayment,
+  CreateAppointment,
+  LoadGenerationsPokemonsList,
+} from "@/domain";
+import { container, pokeApiTypes, scheduleAppointmentTypes } from "@/container";
 
 export function usePayment() {
-  const loadPayment = useCasesStore(state => state.loadPayment)
-  const loadGenerationsPokemonsList = useCasesStore(state => state.loadGenerationsPokemonsList)
-
   const { watch } = useFormContext<CreateAppointment.Params>();
 
   const patients = watch("patients");
 
-  async function getPayment() {
+  async function fetcher() {
     const activePatients = patients?.filter((patient) => !!patient);
 
-    const generations = (await loadGenerationsPokemonsList.loadAll(activePatients)) || [];
+    const generations =
+      (await container
+        .get<LoadGenerationsPokemonsList>(
+          pokeApiTypes.RemoteLoadGenerationsPokemonsList
+        )
+        .loadAll(activePatients)) || [];
 
-    return await loadPayment.load({
-      generations,
-      numberPatients: activePatients?.length || 0,
-    });
+    const response = await container
+      .get<LoadPayment>(scheduleAppointmentTypes.RemoteLoadPayment)
+      .load({
+        generations,
+        numberPatients: activePatients?.length || 0,
+      });
+
+    return response;
   }
 
-  return useQuery(["generations", JSON.stringify(patients)], getPayment, {
+  const stringifyPatients = JSON.stringify(patients);
+
+  return useQuery({
+    queryKey: ["generations", stringifyPatients],
+    queryFn: fetcher,
     retry: 0,
     staleTime: 0,
     refetchInterval: 0,
     refetchOnWindowFocus: false,
+    refetchIntervalInBackground: false,
+    enabled: !!patients,
   });
 }

@@ -15,12 +15,12 @@ export function SearchPokemons(props: ISearchPokemonsSelectProps) {
   const [overlay, setOverlay] = useState(false);
   const [filteredList, setFilteredList] = useState<IFilteredOption[]>([]);
 
-  const { getValues, register, setValue, setError, unregister } =
-    useFormContext();
+  const { getValues, register, setValue, setError, unregister } = useFormContext();
 
   const { listPosition, name, callback, optionsSelect } = props;
 
   const registerName = makeRegisterName(listPosition, name);
+  
   const valueInput = getValues(registerName);
   const options = mergeFilteredOptions(optionsSelect, filteredList);
 
@@ -57,11 +57,13 @@ export function SearchPokemons(props: ISearchPokemonsSelectProps) {
   function handleDelete() {
     unregister(registerName);
 
-    if(listPosition) {
+    if (listPosition) {
       const items = getValues()[name];
-      const removeIndexItemOfList = items?.filter((_: string, index: number) => index !== listPosition)
+      const removeIndexItemOfList = items?.filter(
+        (_: string, index: number) => index !== listPosition
+      );
 
-      setValue(name, removeIndexItemOfList)
+      setValue(name, removeIndexItemOfList);
     }
 
     props.handleDeletePatient(props.patientUid);
@@ -106,7 +108,7 @@ export function SearchPokemons(props: ISearchPokemonsSelectProps) {
 
           {!!(listPosition && listPosition > 0) && (
             <button type="button" className="delete" onClick={handleDelete}>
-               <NextImage src="/images/trash-solid.svg" />
+              <NextImage src="/images/trash-solid.svg" />
             </button>
           )}
         </div>
